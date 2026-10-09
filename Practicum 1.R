@@ -119,7 +119,8 @@ lines(figure1_data$year, figure1_data$weak,
 
 legend("bottom",
        legend = c("Strong Identifiers", "Weak Identifiers"),
-       lty = c(1, 2), pch = 1, bty = "n")
+       lty = c(2, 1), pch = c(1, 16),
+       bty = "n")
 
 # 1B: Independents and leaners
 plot(x = 0, type = "n",
@@ -141,7 +142,7 @@ axis(side = 2, at = seq(0, 0.5, by = 0.1))
 
 legend("topleft",
        legend = c("Pure Independents", "Independent Leaners"),
-       lty = c(1, 2), pch = 1, bty = "n")
-  
+       lty = c(2, 1), pch = c(1, 16),
+       bty = "n")
 
 
