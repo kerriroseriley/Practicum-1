@@ -98,7 +98,7 @@ ces_1 <- ces_1 |>
 
 
 
-
+ 
 # 1A: Strong and weak partisans
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),xaxt = "n",
