@@ -98,23 +98,16 @@ ces_1 <- ces_1 |>
 
 
 
-# Collapse the data by year
-figure1_data <- ces_1 |>
-  group_by(year) |>
-  summarise(
-    strong = mean(strong, na.rm = TRUE),
-    weak = mean(weak, na.rm = TRUE),
-    leaners = mean(leaners, na.rm = TRUE),
-    indeps = mean(indeps, na.rm = TRUE)
-  )
+# Create two plots stacked vertically
+par(mfrow = c(2, 1), mar = c(3, 4, 2, 2))
 
-# Plot strong and weak partisans
+# Top graph: Strong and weak partisans
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),
-     ylim = c(0, 0.6),
-     xlab = "Year",
+     ylim = c(0, 0.5),
+     xlab = "",
      ylab = "Proportion",
-     main = "Figure 1a: Party Identification")
+     main = "Distribution of Party Identification")
 
 lines(figure1_data$year, figure1_data$strong,
       type = "o", col = "black", lty = 1)
@@ -123,53 +116,15 @@ lines(figure1_data$year, figure1_data$weak,
       type = "o", col = "black", lty = 2)
 
 legend("topright",
-       legend = c("Strong Partisans", "Weak Partisans"),
-       col = c("black", "black"),
-       lty = c(1, 2),
-       pch = 1)
+       legend = c("Strong Identifiers", "Weak Identifiers"),
+       lty = c(1, 2), pch = 1, bty = "n")
 
-# Collapse the data by year
-figure1_data <- ces_1 |>
-  group_by(year) |>
-  summarise(
-    strong = mean(strong, na.rm = TRUE),
-    weak = mean(weak, na.rm = TRUE),
-    leaners = mean(leaners, na.rm = TRUE),
-    indeps = mean(indeps, na.rm = TRUE)
-  )
-
-# Plot strong and weak partisans
+# Bottom graph: Independents and leaners
 plot(x = 0, type = "n",
-     xlim = c(2006, 2024), xaxt = "n",
-     ylim = c(0, 0.6), yaxt = "n",
+     xlim = range(figure1_data$year),
+     ylim = c(0, 0.5),
      xlab = "Year",
-     ylab = "Proportion",
-     main = "Figure 1a")
-
-axis(1, at = seq(2008, 2024, by = 4))
-axis(2)
-
-lines(figure1_data$year, figure1_data$strong,
-      type = "o", col = "black", lty = 1)
-
-lines(figure1_data$year, figure1_data$weak,
-      type = "o", col = "black", lty = 2)
-
-legend("topright",
-       legend = c("Strong", "Weak"),
-       col = c("black", "black"),
-       lty = c(1, 2), pch = 1)
-# Indepents and Leaners
-
-plot(x = 0, type = "n",
-     xlim = c(2006, 2024), xaxt = "n",
-     ylim = c(0, 0.6), yaxt = "n",
-     xlab = "Year",
-     ylab = "Proportion",
-     main = "Figure 1b")
-
-axis(1, at = seq(2008, 2024, by = 4))
-axis(2)
+     ylab = "Proportion")
 
 lines(figure1_data$year, figure1_data$indeps,
       type = "o", col = "black", lty = 1)
@@ -178,8 +133,9 @@ lines(figure1_data$year, figure1_data$leaners,
       type = "o", col = "black", lty = 2)
 
 legend("topright",
-       legend = c("Independents", "Leaners"),
-       col = c("black", "black"),
-       lty = c(1, 2), pch = 1)
+       legend = c("Pure Independents", "Independent Leaners"),
+       lty = c(1, 2), pch = 1, bty = "n")
 
+# Reset plotting layout
+par(mfrow = c(1, 1))
 
