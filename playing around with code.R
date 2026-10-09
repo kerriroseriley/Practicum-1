@@ -65,7 +65,7 @@ fig1b
 # Lattice:
 # Figure 1A: Strong and Weak Partisans
 library(lattice)
-
+ 
 xyplot(
   strong + weak ~ year,
   data = figure1_data,

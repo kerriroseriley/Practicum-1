@@ -98,8 +98,9 @@ ces_1 <- ces_1 |>
 
 
 
- 
-# 1A: Strong and weak partisans
+# Graphing Section
+
+# Figure 1A: Strong and weak partisans
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
@@ -122,7 +123,7 @@ legend("bottom",
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
 
-# 1B: Independents and leaners
+# Figure 1B: Independents and leaners
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year), xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
@@ -144,5 +145,8 @@ legend("topleft",
        legend = c("Pure Independents", "Independent Leaners"),
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
+
+
+# Figure 2
 
 
