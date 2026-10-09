@@ -98,16 +98,18 @@ ces_1 <- ces_1 |>
 
 
 
-# Create two plots stacked vertically
-par(mfrow = c(2, 1), mar = c(3, 4, 2, 2))
 
-# Top graph: Strong and weak partisans
+# 1A: Strong and weak partisans
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),
      ylim = c(0, 0.5),
      xlab = "",
      ylab = "Proportion",
-     main = "Distribution of Party Identification")
+     main = "Distribution of Party Identification",
+     xaxt = "n")
+
+# Add x-axis labels every 2 years
+axis(side = 1, at = seq(2006, 2024, by = 8))
 
 lines(figure1_data$year, figure1_data$strong,
       type = "o", col = "black", lty = 1)
@@ -119,12 +121,13 @@ legend("bottom",
        legend = c("Strong Identifiers", "Weak Identifiers"),
        lty = c(1, 2), pch = 1, bty = "n")
 
-# Bottom graph: Independents and leaners
+# 1B: Independents and leaners
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),
      ylim = c(0, 0.5),
      xlab = "Year",
-     ylab = "Proportion")
+     ylab = "Proportion",
+     xaxt = "n")
 
 lines(figure1_data$year, figure1_data$indeps,
       type = "o", col = "black", lty = 1)
@@ -132,10 +135,12 @@ lines(figure1_data$year, figure1_data$indeps,
 lines(figure1_data$year, figure1_data$leaners,
       type = "o", col = "black", lty = 2)
 
+# Add x-axis labels every 2 years
+axis(side = 1, at = seq(2006, 2024, by = 8))
+
 legend("topleft",
        legend = c("Pure Independents", "Independent Leaners"),
        lty = c(1, 2), pch = 1, bty = "n")
+ 
 
-# Reset plotting layout
-par(mfrow = c(1, 1))
 
