@@ -4,4 +4,9 @@ author: "Kerri Rose Riley"
 format: 
   pdf: default
 ---
+```{r}
+library(tidyverse)
+library(haven)
+
+```
 
