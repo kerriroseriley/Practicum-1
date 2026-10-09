@@ -12,10 +12,9 @@ library(ggplot2) # Load ggplot2 for creating graphs and plots
 setwd("~/Desktop/Current Classes/R/Practicum 1")
 
 ces <- read_data("~/Desktop/Current Classes/R/Practicum 1/Data/ces.dta")
-
-# Select the variables you need
-
-ces_1 <- ces |> select(
+ 
+# Select the variables I need
+ces_1 <- ces |> select(year, pid7, vv_turnout_gvm)
 
 table(ces_1$year)
 table(ces_1$year)
