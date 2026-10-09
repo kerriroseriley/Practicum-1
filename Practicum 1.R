@@ -115,7 +115,7 @@ lines(figure1_data$year, figure1_data$strong,
 lines(figure1_data$year, figure1_data$weak,
       type = "o", col = "black", lty = 2)
 
-legend("topright",
+legend("bottom",
        legend = c("Strong Identifiers", "Weak Identifiers"),
        lty = c(1, 2), pch = 1, bty = "n")
 
@@ -132,7 +132,7 @@ lines(figure1_data$year, figure1_data$indeps,
 lines(figure1_data$year, figure1_data$leaners,
       type = "o", col = "black", lty = 2)
 
-legend("topright",
+legend("topleft",
        legend = c("Pure Independents", "Independent Leaners"),
        lty = c(1, 2), pch = 1, bty = "n")
 
