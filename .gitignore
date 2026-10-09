@@ -47,3 +47,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+Data/cumulative_2006-2024.dta
+Data/cumulative_2006-2024.rds
+Data/cumulative_2006-2024.feather
