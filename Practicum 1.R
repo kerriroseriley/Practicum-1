@@ -101,15 +101,15 @@ ces_1 <- ces_1 |>
 
 # 1A: Strong and weak partisans
 plot(x = 0, type = "n",
-     xlim = range(figure1_data$year),
-     ylim = c(0, 0.5),
-     xlab = "",
-     ylab = "Proportion",
-     main = "Distribution of Party Identification",
-     xaxt = "n")
+     xlim = range(figure1_data$year),xaxt = "n",
+     ylim = c(0, 0.5), yaxt = "n",
+     xlab = " ",
+     ylab = " ",
+     main = "Distribution of Party Identification",)
 
-# Add x-axis labels every 2 years
+# Add axis labels
 axis(side = 1, at = seq(2006, 2024, by = 8))
+axis(side = 2, at = seq(0, 0.5, by = 0.1))
 
 lines(figure1_data$year, figure1_data$strong,
       type = "o", col = "black", lty = 1)
@@ -123,11 +123,11 @@ legend("bottom",
 
 # 1B: Independents and leaners
 plot(x = 0, type = "n",
-     xlim = range(figure1_data$year),
-     ylim = c(0, 0.5),
-     xlab = "Year",
-     ylab = "Proportion",
-     xaxt = "n")
+     xlim = range(figure1_data$year), xaxt = "n",
+     ylim = c(0, 0.5), yaxt = "n",
+     xlab = " ",
+     ylab = " ",
+     main=" ")
 
 lines(figure1_data$year, figure1_data$indeps,
       type = "o", col = "black", lty = 1)
@@ -135,12 +135,13 @@ lines(figure1_data$year, figure1_data$indeps,
 lines(figure1_data$year, figure1_data$leaners,
       type = "o", col = "black", lty = 2)
 
-# Add x-axis labels every 2 years
+# Add axis labels
 axis(side = 1, at = seq(2006, 2024, by = 8))
+axis(side = 2, at = seq(0, 0.5, by = 0.1))
 
 legend("topleft",
        legend = c("Pure Independents", "Independent Leaners"),
        lty = c(1, 2), pch = 1, bty = "n")
- 
+  
 
 
