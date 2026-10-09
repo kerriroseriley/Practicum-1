@@ -5,4 +5,16 @@
 #Output: Figures as PDFs (ggplot only) 
 
 
+library(tidyverse)
+library(haven)
+
+setwd("~/Desktop/Current Classes/R/Practicum 1")
+
 ces <- read_data("~/Desktop/Current Classes/R/Practicum 1/Data/ces.dta")
+
+# Select the variables you need
+
+ces_1 <- ces |> select(
+
+table(ces_1$year)
+table(ces_1$year)
