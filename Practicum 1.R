@@ -112,7 +112,7 @@ axis(side = 1, at = seq(2006, 2024, by = 8))
 axis(side = 2, at = seq(0, 0.5, by = 0.1))
 
 lines(figure1_data$year, figure1_data$strong,
-      type = "o", col = "black", lty = 1)
+      type = "o", col = "black", lty = 1, pch=16)
 
 lines(figure1_data$year, figure1_data$weak,
       type = "o", col = "black", lty = 2)
@@ -130,7 +130,7 @@ plot(x = 0, type = "n",
      main=" ")
 
 lines(figure1_data$year, figure1_data$indeps,
-      type = "o", col = "black", lty = 1)
+      type = "o", col = "black", lty = 1, pch=16)
 
 lines(figure1_data$year, figure1_data$leaners,
       type = "o", col = "black", lty = 2)
