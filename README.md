@@ -1,6 +1,6 @@
 # Practicum 1
 
-# PAI741 - Practicum 1
+# PAI741 - Data Wrangling and Visualizations
 
 # Author: Kerri Rose Riley
 
