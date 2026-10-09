@@ -5,8 +5,9 @@
 #Output: Figures as PDFs (ggplot only) 
 
 
-library(tidyverse)
-library(haven)
+library(tidyverse) # Load the tidyverse package for data wrangling and analysis
+library(haven) # Load haven so read_dta() can be used to import Stata data files
+library(ggplot2) # Load ggplot2 for creating graphs and plots
 
 setwd("~/Desktop/Current Classes/R/Practicum 1")
 
@@ -18,3 +19,7 @@ ces_1 <- ces |> select(
 
 table(ces_1$year)
 table(ces_1$year)
+
+
+
+
