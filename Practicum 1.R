@@ -16,7 +16,7 @@ setwd("~/Desktop/Current Classes/R/Practicum 1")
 # Read the data file
 ces <- read_dta("~/Desktop/Current Classes/R/Practicum 1/Data/ces.dta")
  
-# Select the variables I need 
+# Select the variables Bartel would use
 ces_1 <- ces |> select(year, pid7, vv_turnout_gvm)
 
 table(ces_1$year)
