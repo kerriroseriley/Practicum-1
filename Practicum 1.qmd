@@ -4,9 +4,16 @@ author: "Kerri Rose Riley"
 format: 
   pdf: default
 ---
-```{r}
-library(tidyverse)
-library(haven)
 
-```
+What follows are three replications of Bartels:
 
+- Figure 1: The Distribution of Party Identification
+- Figure 2: Party Identification Among Presidental Voters and Nonvoters
+
+## Figure 1 
+
+![Expanded](../figures/ggplot/figure1.png){fig-align="center" width="70%"}
+
+## Figure 2
+
+![Expanded](../figures/ggplot/figure1.png){fig-align="center" width="70%"}

@@ -2,7 +2,7 @@
 #Author: Kerri Rose Riley
 #Purpose: Replicate Figures 1 and 2 from Bartels (2000), “Partisanship and Voting Behavior”
 #Requires: Cumulative CCES Dataset (2006-2024)
-#Output: Figures as PDFs (ggplot only) 
+#Output: Figures as PDFs
 
 # Packages
 library(tidyverse) # Load the tidyverse package for data wrangling and analysis
@@ -97,7 +97,7 @@ ces_1 <- ces_1 |>
     )
   )
 
-
+ 
 
 # Graphing Section
 
@@ -165,7 +165,7 @@ plot(x = 0, type = "n",
      ylim = c(0, 1), yaxt = "n",
      xlab = " ",
      ylab = " ",
-     main = "Party Identification by Voting Status")
+     main = "Proportions of (Strong or Weak) Identifiers in Cooroperative Election Study Sample")
 
 axis(side = 1, at = seq(2006, 2024, by = 8))
 axis(side = 2, at = seq(0, 1, by = 0.1))
