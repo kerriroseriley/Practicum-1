@@ -147,6 +147,37 @@ legend("topleft",
        bty = "n")
 
 
-# Figure 2
+# Figure 2: Party Identification by Voting Status
 
+figure2_data <- ces_1 |>
+  group_by(year) |>
+  summarise(
+    voters = mean(identvote, na.rm = TRUE),
+    nonvoters = mean(identnovote, na.rm = TRUE)
+  ) |>
+  filter(!is.nan(voters), !is.nan(nonvoters))
 
+# Create graph
+plot(x = 0, type = "n",
+     xlim = range(figure2_data$year),
+     ylim = c(0, 1),
+     xaxt = "n", yaxt = "n",
+     xlab = " ",
+     ylab = " ",
+     main = "Party Identification by Voting Status")
+
+axis(side = 1, at = seq(2006, 2024, by = 8))
+axis(side = 2, at = seq(0, 1, by = 0.1))
+
+# Voters
+lines(figure2_data$year, figure2_data$voters,
+      type = "o", col = "black", lty = 1, pch = 16)
+
+# Respondents with no record of voting
+lines(figure2_data$year, figure2_data$nonvoters,
+      type = "o", col = "black", lty = 2, pch = 1)
+
+legend("bottom",
+       legend = c("Voters", "No Record of Voting"),
+       lty = c(1, 2), pch = c(16, 1),
+       bty = "n")
