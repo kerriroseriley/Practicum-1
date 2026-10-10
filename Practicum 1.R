@@ -61,6 +61,7 @@ ces_1 <- ces_1 |>
     
   )
 
+
 # Figure 2 coding
 ces_1 <- ces_1 |>
   mutate(
@@ -157,11 +158,11 @@ figure2_data <- ces_1 |>
   ) |>
   filter(!is.nan(voters), !is.nan(nonvoters))
 
+
 # Create graph
 plot(x = 0, type = "n",
-     xlim = range(figure2_data$year),
-     ylim = c(0, 1),
-     xaxt = "n", yaxt = "n",
+     xlim = range(figure2_data$year), xaxt = "n",
+     ylim = c(0, 1), yaxt = "n",
      xlab = " ",
      ylab = " ",
      main = "Party Identification by Voting Status")
@@ -177,7 +178,7 @@ lines(figure2_data$year, figure2_data$voters,
 lines(figure2_data$year, figure2_data$nonvoters,
       type = "o", col = "black", lty = 2, pch = 1)
 
-legend("bottom",
-       legend = c("Voters", "No Record of Voting"),
+legend("bottomleft",
+       legend = c("Voters", "Nonvoters"),
        lty = c(1, 2), pch = c(16, 1),
        bty = "n")
