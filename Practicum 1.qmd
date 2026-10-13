@@ -12,8 +12,8 @@ What follows are three replications of Bartels:
 
 ## Figure 1 
 
-![Expanded](../figures/ggplot/figure1.png){fig-align="center" width="70%"}
+![Expanded](../Figures/figure1.png){fig-align="center" width="70%"}
 
 ## Figure 2
 
-![Expanded](../figures/ggplot/figure1.png){fig-align="center" width="70%"}
+![Expanded](../Figures/figure1.png){fig-align="center" width="70%"}
