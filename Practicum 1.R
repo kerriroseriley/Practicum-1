@@ -102,6 +102,11 @@ ces_1 <- ces_1 |>
 # Graphing Section
 
 # Figure 1A: Strong and weak partisans
+
+# Save Figure 1A
+png("Figures/figure1a.png", width = 8, height = 6,
+    units = "in", res = 300)
+
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
@@ -124,7 +129,15 @@ legend("bottom",
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
 
+dev.off()
+
 # Figure 1B: Independents and leaners
+
+# Save Figure 1B
+png("Figures/figure1b.png", width = 8, height = 6,
+    units = "in", res = 300)
+
+
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year), xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
@@ -147,6 +160,7 @@ legend("topleft",
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
 
+dev.off()
 
 # Figure 2: Party Identification by Voting Status
 
@@ -160,6 +174,12 @@ figure2_data <- ces_1 |>
 
 
 # Create graph
+
+# Save Figure 2
+png("Figures/figure2.png", width = 8, height = 6,
+    units = "in", res = 300)
+
+
 plot(x = 0, type = "n",
      xlim = range(figure2_data$year), xaxt = "n",
      ylim = c(0, 1), yaxt = "n",
@@ -182,3 +202,5 @@ legend("bottomleft",
        legend = c("Voters", "Nonvoters"),
        lty = c(1, 2), pch = c(16, 1),
        bty = "n")
+
+dev.off()
