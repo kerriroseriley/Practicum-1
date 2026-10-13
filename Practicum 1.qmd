@@ -5,15 +5,18 @@ format:
   pdf: default
 ---
 
-What follows are three replications of Bartels:
+What follows are two replications of Bartel's Figures 1 and 2 from "Partisanship and Voting Behavior" (2000), using the Cumulative CCES Dataset:
 
 - Figure 1: The Distribution of Party Identification
-- Figure 2: Party Identification Among Presidental Voters and Nonvoters
+- Figure 2: Party Identification Among Presidential Voters and Nonvoters
 
-## Figure 1 
+## Figure 1A
+![Figure 1A](Figures/figure1a.png){fig-align="center" width="70%"}
 
-![Expanded](../Figures/figure1.png){fig-align="center" width="70%"}
+
+## Figure 1B
+![Figure 1B](Figures/figure1b.png){fig-align="center" width="70%"}
+
 
 ## Figure 2
-
-![Expanded](../Figures/figure1.png){fig-align="center" width="70%"}
+![Figure 2](Figures/figure2.png){fig-align="center" width="70%"}

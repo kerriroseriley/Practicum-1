@@ -2,13 +2,12 @@
 #Author: Kerri Rose Riley
 #Purpose: Replicate Figures 1 and 2 from Bartels (2000), “Partisanship and Voting Behavior”
 #Requires: Cumulative CCES Dataset (2006-2024)
-#Output: Figures as PDFs
+#Output: Figures and Quarto Document typeset as a .pdf
 
 # Packages
 library(tidyverse) # Load the tidyverse package for data wrangling and analysis
 library(haven) # Load haven so read_dta() can be used to import Stata data files
 library(ggplot2) # Load ggplot2 for creating graphs and plots
-
 
 # Set the working directory
 setwd("~/Desktop/Current Classes/R/Practicum 1")
@@ -25,7 +24,6 @@ table(ces_1$vv_turnout_gvm)
 
 
 # Recode party identification for Figure 1
-
 ces_1 <- ces_1 |>
   mutate(
     # Exclude non-substantive responses
@@ -62,7 +60,7 @@ ces_1 <- ces_1 |>
   )
 
 
-# Figure 2 coding
+# Figure 2 Recoding
 ces_1 <- ces_1 |>
   mutate(
     # Convert turnout variable to readable labels
@@ -96,17 +94,13 @@ ces_1 <- ces_1 |>
       TRUE ~ NA_real_
     )
   )
-
- 
-
 # Graphing Section
-
 # Figure 1A: Strong and weak partisans
-
 # Save Figure 1A
 png("Figures/figure1a.png", width = 8, height = 6,
     units = "in", res = 300)
 
+# Plot
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
@@ -117,37 +111,37 @@ plot(x = 0, type = "n",
 # Add axis labels
 axis(side = 1, at = seq(2006, 2024, by = 8))
 axis(side = 2, at = seq(0, 0.5, by = 0.1))
-
+# Add line for weal identifiers
 lines(figure1_data$year, figure1_data$strong,
       type = "o", col = "black", lty = 1, pch=16)
-
+# Add line for strong identifiers
 lines(figure1_data$year, figure1_data$weak,
       type = "o", col = "black", lty = 2)
 
+# Add legend
 legend("bottom",
        legend = c("Strong Identifiers", "Weak Identifiers"),
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
-
+# Finish saving and close the graphics device
 dev.off()
 
 # Figure 1B: Independents and leaners
-
 # Save Figure 1B
 png("Figures/figure1b.png", width = 8, height = 6,
     units = "in", res = 300)
 
-
+# Plot
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year), xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
      xlab = " ",
      ylab = " ",
      main=" ")
-
+# Add line for independent leaners
 lines(figure1_data$year, figure1_data$indeps,
       type = "o", col = "black", lty = 1, pch=16)
-
+# Add line for pure independents
 lines(figure1_data$year, figure1_data$leaners,
       type = "o", col = "black", lty = 2)
 
@@ -155,15 +149,15 @@ lines(figure1_data$year, figure1_data$leaners,
 axis(side = 1, at = seq(2006, 2024, by = 8))
 axis(side = 2, at = seq(0, 0.5, by = 0.1))
 
+#Add legend
 legend("topleft",
        legend = c("Pure Independents", "Independent Leaners"),
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
-
+# Finish saving and close the graphics device
 dev.off()
 
 # Figure 2: Party Identification by Voting Status
-
 figure2_data <- ces_1 |>
   group_by(year) |>
   summarise(
@@ -172,14 +166,12 @@ figure2_data <- ces_1 |>
   ) |>
   filter(!is.nan(voters), !is.nan(nonvoters))
 
-
 # Create graph
-
 # Save Figure 2
 png("Figures/figure2.png", width = 8, height = 6,
     units = "in", res = 300)
 
-
+# Plot
 plot(x = 0, type = "n",
      xlim = range(figure2_data$year), xaxt = "n",
      ylim = c(0, 1), yaxt = "n",
@@ -187,20 +179,22 @@ plot(x = 0, type = "n",
      ylab = " ",
      main = "Proportions of (Strong or Weak) Identifiers in Cooroperative Election Study Sample")
 
+# Add axis labels
 axis(side = 1, at = seq(2006, 2024, by = 8))
 axis(side = 2, at = seq(0, 1, by = 0.1))
 
-# Voters
+# Add Line for Voters
 lines(figure2_data$year, figure2_data$voters,
       type = "o", col = "black", lty = 1, pch = 16)
 
-# Respondents with no record of voting
+# Add line for Nonvoters
 lines(figure2_data$year, figure2_data$nonvoters,
       type = "o", col = "black", lty = 2, pch = 1)
 
+# Customize legend
 legend("bottomleft",
        legend = c("Voters", "Nonvoters"),
        lty = c(1, 2), pch = c(16, 1),
        bty = "n")
-
+# Finish saving and close the graphics device
 dev.off()
