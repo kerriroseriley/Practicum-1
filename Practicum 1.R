@@ -22,7 +22,6 @@ table(ces_1$year)
 table(ces_1$pid7)
 table(ces_1$vv_turnout_gvm)
 
-
 # Recode party identification for Figure 1
 ces_1 <- ces_1 |>
   mutate(
@@ -43,14 +42,14 @@ ces_1 <- ces_1 |>
       TRUE ~ NA_real_
     ),
     
-    # Party leaners
+    # Party Leaners
     leaners = case_when(
       pid %in% c(3, 5) ~ 1,
       pid %in% c(1, 2, 4, 6, 7) ~ 0,
       TRUE ~ NA_real_
     ),
     
-    # Pure independents
+    # Pure Independents
     indeps = case_when(
       pid == 4 ~ 1,
       pid %in% c(1, 2, 3, 5, 6, 7) ~ 0,
@@ -61,7 +60,6 @@ ces_1 <- ces_1 |>
 
 
 #ggplot
-
 # Figure 1A: Strong and Weak Partisans
 fig1a <- ggplot(ces_1, aes(x = year)) +
   geom_line(aes(y = strong, linetype = "Strong Identifiers"),
@@ -91,38 +89,8 @@ fig1a <- ggplot(ces_1, aes(x = year)) +
   theme_minimal(base_size = 12) +
   theme(panel.grid.minor = element_blank())
 
-# Figure 1B: Pure Independents and Independent Leaners
-fig1b <- ggplot(ces_1, aes(x = year)) +
-  geom_line(aes(y = indeps, linetype = "Pure Independents"),
-            linewidth = 1.2) +
-  geom_line(aes(y = leaners, linetype = "Independent Leaners"),
-            linewidth = 1.2) +
-  geom_point(aes(y = indeps), size = 2) +
-  geom_point(aes(y = leaners), size = 2) +
-  scale_x_continuous(
-    limits = c(2006, 2024),
-    breaks = seq(2006, 2024, by = 2)
-  ) +
-  scale_y_continuous(
-    limits = c(0, 0.5),
-    breaks = seq(0, 0.5, by = 0.1)
-  ) +
-  scale_linetype_manual(
-    name = NULL,
-    values = c("Pure Independents" = "solid",
-               "Independent Leaners" = "dashed")
-  ) +
-  labs(
-    x = NULL,
-    y = NULL,
-    title = "Figure 1B. Pure Independents and Independent Leaners"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(panel.grid.minor = element_blank())
-
 # Display the graphs
 fig1a
-fig1b
 
 
 # Figure 2 Recoding
@@ -160,5 +128,36 @@ figure2_data <- ces_1 |>
     )
   )
 
-
 # Figure 2: 
+
+
+# Figure 1B: Pure Independents and Independent Leaners
+fig1b <- ggplot(ces_1, aes(x = year)) +
+  geom_line(aes(y = indeps, linetype = "Pure Independents"),
+            linewidth = 1.2) +
+  geom_line(aes(y = leaners, linetype = "Independent Leaners"),
+            linewidth = 1.2) +
+  geom_point(aes(y = indeps), size = 2) +
+  geom_point(aes(y = leaners), size = 2) +
+  scale_x_continuous(
+    limits = c(2006, 2024),
+    breaks = seq(2006, 2024, by = 2)
+  ) +
+  scale_y_continuous(
+    limits = c(0, 0.5),
+    breaks = seq(0, 0.5, by = 0.1)
+  ) +
+  scale_linetype_manual(
+    name = NULL,
+    values = c("Pure Independents" = "solid",
+               "Independent Leaners" = "dashed")
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    title = "Figure 1B. Pure Independents and Independent Leaners"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank())
+
+fig1b
