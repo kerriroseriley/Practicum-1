@@ -59,47 +59,76 @@ ces_1 <- ces_1 |>
   )
 
 
-#ggplot
-# Figure 1A: Strong and Weak Partisans
-fig1a <- ggplot(ces_1, aes(x = year)) +
-  geom_line(aes(y = strong, linetype = "Strong Identifiers"),
-            linewidth = 1.2) +
-  geom_line(aes(y = weak, linetype = "Weak Identifiers"),
-            linewidth = 1.2) +
-  geom_point(aes(y = strong), size = 2) +
-  geom_point(aes(y = weak), size = 2) +
-  scale_x_continuous(
-    limits = c(2006, 2024),
-    breaks = seq(2006, 2024, by = 2)
-  ) +
-  scale_y_continuous(
-    limits = c(0, 0.5),
-    breaks = seq(0, 0.5, by = 0.1)
-  ) +
-  scale_linetype_manual(
-    name = NULL,
-    values = c("Strong Identifiers" = "solid",
-               "Weak Identifiers" = "dashed")
-  ) +
-  labs(
-    x = NULL,
-    y = NULL,
-    title = "Figure 1A. Strong and Weak Partisans"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(panel.grid.minor = element_blank())
+# Calculate the mean for each year
+figure1_data <- ces_1 |>
+  group_by(year) |>
+  summarise(
+    strong = mean(strong, na.rm = TRUE),
+    weak = mean(weak, na.rm = TRUE),
+    leaners = mean(leaners, na.rm = TRUE),
+    indeps = mean(indeps, na.rm = TRUE),
+    .groups = "drop"
+  )
 
-# Display the graphs
-fig1a
+# Graphing Section: Base R
+# Figure 1A: Strong and weak partisans
+# Plot
+plot(x = 0, type = "n",
+     xlim = range(figure1_data$year),xaxt = "n",
+     ylim = c(0, 0.5), yaxt = "n",
+     xlab = " ",
+     ylab = " ",
+     main = "Distribution of Party Identification",)
+
+# Add axis labels
+axis(side = 1, at = seq(2006, 2024, by = 8))
+axis(side = 2, at = seq(0, 0.5, by = 0.1))
+# Add line for weal identifiers
+lines(figure1_data$year, figure1_data$strong,
+      type = "o", col = "black", lty = 1, pch=16)
+# Add line for strong identifiers
+lines(figure1_data$year, figure1_data$weak,
+      type = "o", col = "black", lty = 2)
+
+# Add legend
+legend("bottom",
+       legend = c("Strong Identifiers", "Weak Identifiers"),
+       lty = c(2, 1), pch = c(1, 16),
+       bty = "n")
 
 
-# Figure 2 Recoding
-figure2_data <- ces_1 |>
+# Figure 1B: Independents and leaners
+
+# Plot
+plot(x = 0, type = "n",
+     xlim = range(figure1_data$year), xaxt = "n",
+     ylim = c(0, 0.5), yaxt = "n",
+     xlab = " ",
+     ylab = " ",
+     main=" ")
+# Add line for independent leaners
+lines(figure1_data$year, figure1_data$indeps,
+      type = "o", col = "black", lty = 1, pch=16)
+# Add line for pure independents
+lines(figure1_data$year, figure1_data$leaners,
+      type = "o", col = "black", lty = 2)
+
+# Add axis labels
+axis(side = 1, at = seq(2006, 2024, by = 8))
+axis(side = 2, at = seq(0, 0.5, by = 0.1))
+
+#Add legend
+legend("topleft",
+       legend = c("Pure Independents", "Independent Leaners"),
+       lty = c(2, 1), pch = c(1, 16),
+       bty = "n")
+
+# Figure 2: Recoding
+ces_1 <- ces_1 |>
   mutate(
-    # Convert turnout variable to readable labels
     turnout_label = as_factor(vv_turnout_gvm),
     
-    # Identify party identifiers
+    # Identify strong or weak partisans
     identifiers = case_when(
       pid %in% c(1, 2, 6, 7) ~ 1,
       pid %in% c(3, 4, 5) ~ 0,
@@ -113,51 +142,52 @@ figure2_data <- ces_1 |>
       NA_real_
     ),
     
-    # Party identifiers among those with no voting record
+    # Party identifiers among nonvoters
     identnovote = if_else(
       turnout_label == "No Record of Voting",
       identifiers,
       NA_real_
-    ),
-    
-    # Recode turnout
-    turnout = case_when(
-      turnout_label == "Voted" ~ 1,
-      turnout_label == "No Record of Voting" ~ 0,
-      TRUE ~ NA_real_
     )
   )
 
-# Figure 2: 
+# Check turnout labels
+table(ces_1$turnout_label, useNA = "ifany")
 
+# Calculate yearly means for Figure 2
+figure2_data <- ces_1 |>
+  group_by(year) |>
+  summarise(
+    voters = if (all(is.na(identvote))) NA_real_
+    else mean(identvote, na.rm = TRUE),
+    nonvoters = if (all(is.na(identnovote))) NA_real_
+    else mean(identnovote, na.rm = TRUE),
+    .groups = "drop"
+  )
 
-# Figure 1B: Pure Independents and Independent Leaners
-fig1b <- ggplot(ces_1, aes(x = year)) +
-  geom_line(aes(y = indeps, linetype = "Pure Independents"),
-            linewidth = 1.2) +
-  geom_line(aes(y = leaners, linetype = "Independent Leaners"),
-            linewidth = 1.2) +
-  geom_point(aes(y = indeps), size = 2) +
-  geom_point(aes(y = leaners), size = 2) +
-  scale_x_continuous(
-    limits = c(2006, 2024),
-    breaks = seq(2006, 2024, by = 2)
-  ) +
-  scale_y_continuous(
-    limits = c(0, 0.5),
-    breaks = seq(0, 0.5, by = 0.1)
-  ) +
-  scale_linetype_manual(
-    name = NULL,
-    values = c("Pure Independents" = "solid",
-               "Independent Leaners" = "dashed")
-  ) +
-  labs(
-    x = NULL,
-    y = NULL,
-    title = "Figure 1B. Pure Independents and Independent Leaners"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(panel.grid.minor = element_blank())
+# View yearly means
+print(figure2_data)
 
-fig1b
+# Figure 2: Party Identification by Voting Status
+plot(NA,
+     xlim = c(2006, 2024),
+     ylim = c(0, 1),
+     xaxt = "n",
+     yaxt = "n",
+     xlab = "Year",
+     ylab = "Proportion of Party Identifiers",
+     main = "Party Identification by Voting Status")
+
+axis(1, at = seq(2006, 2024, by = 2))
+axis(2, at = seq(0, 1, by = 0.1), las = 1)
+
+lines(figure2_data$year, figure2_data$voters,
+      type = "o", col = "black", lty = 1, pch = 16)
+
+lines(figure2_data$year, figure2_data$nonvoters,
+      type = "o", col = "black", lty = 2, pch = 1)
+
+legend("bottomleft",
+       legend = c("Voters", "Nonvoters"),
+       lty = c(1, 2),
+       pch = c(16, 1),
+       bty = "n")
