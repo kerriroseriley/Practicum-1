@@ -7,7 +7,6 @@
 # Packages
 library(tidyverse) # Load the tidyverse package for data wrangling and analysis
 library(haven) # Load haven so read_dta() can be used to import Stata data files
-library(ggplot2) # Load ggplot2 for creating graphs and plots
 
 # Set the working directory
 setwd("~/Desktop/Current Classes/R/Practicum 1")
