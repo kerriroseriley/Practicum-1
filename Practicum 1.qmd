@@ -1,7 +1,7 @@
 ---
 title: "Practicum 1"
 author: "Kerri Rose Riley"
-format: 
+format:
   pdf: default
 ---
 
