@@ -124,9 +124,11 @@ legend("topleft",
        bty = "n")
 
 # Figure 2: Recoding
+
+# Figure 2: Recoding
 ces_1 <- ces_1 |>
   mutate(
-    turnout_label = as_factor(vv_turnout_gvm),
+    turnout_label = trimws(as.character(as_factor(vv_turnout_gvm))),
     
     # Identify strong or weak partisans
     identifiers = case_when(
@@ -136,17 +138,15 @@ ces_1 <- ces_1 |>
     ),
     
     # Party identifiers among voters
-    identvote = if_else(
-      turnout_label == "Voted",
-      identifiers,
-      NA_real_
+    identvote = case_when(
+      turnout_label == "Voted" ~ identifiers,
+      TRUE ~ NA_real_
     ),
     
     # Party identifiers among nonvoters
-    identnovote = if_else(
-      turnout_label == "No Record of Voting",
-      identifiers,
-      NA_real_
+    identnovote = case_when(
+      turnout_label == "No Record of Voting" ~ identifiers,
+      TRUE ~ NA_real_
     )
   )
 
@@ -174,11 +174,13 @@ axis(side = 1, at = seq(2006, 2024, by = 2))
 axis(side = 2, at = seq(0, 1, by = 0.1), las = 1)
 
 # Add line for voters
-lines(figure2_data$year, figure2_data$voters,
+lines(figure2_data$year[!is.na(figure2_data$voters)],
+      figure2_data$voters[!is.na(figure2_data$voters)],
       type = "o", col = "black", lty = 1, pch = 16)
 
 # Add line for nonvoters
-lines(figure2_data$year, figure2_data$nonvoters,
+lines(figure2_data$year[!is.na(figure2_data$nonvoters)],
+      figure2_data$nonvoters[!is.na(figure2_data$nonvoters)],
       type = "o", col = "black", lty = 2, pch = 1)
 
 # Add legend
