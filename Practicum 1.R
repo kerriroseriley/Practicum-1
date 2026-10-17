@@ -3,7 +3,7 @@
 #Purpose: Replicate Figures 1 and 2 from Bartels (2000), “Partisanship and Voting Behavior”
 #Requires: Cumulative CCES Dataset (2006-2024)
 #Output: Figures and Quarto Document typeset as a .pdf
-
+ 
 # Packages
 library(tidyverse) # Load the tidyverse package for data wrangling and analysis
 library(haven) # Load haven so read_dta() can be used to import Stata data files
@@ -57,7 +57,6 @@ ces_1 <- ces_1 |>
     
   )
 
-
 # Calculate the mean for each year
 figure1_data <- ces_1 |>
   group_by(year) |>
@@ -97,7 +96,6 @@ legend("bottom",
 
 
 # Figure 1B: Independents and leaners
-
 # Plot
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year), xaxt = "n",
