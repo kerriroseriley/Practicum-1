@@ -16,10 +16,6 @@ ces <- read_dta("~/Desktop/Current Classes/R/Practicum 1/Data/ces.dta")
  
 # Select the variables Bartel would use
 ces_1 <- ces |> select(year, pid7, vv_turnout_gvm)
- 
-table(ces_1$year)
-table(ces_1$pid7)
-table(ces_1$vv_turnout_gvm)
 
 # Recode party identification for Figure 1
 ces_1 <- ces_1 |>
@@ -70,7 +66,6 @@ figure1_data <- ces_1 |>
 
 # Graphing Section: Base R
 # Figure 1A: Strong and weak partisans
-# Plot
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year),xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
@@ -81,9 +76,11 @@ plot(x = 0, type = "n",
 # Add axis labels
 axis(side = 1, at = seq(2006, 2024, by = 8))
 axis(side = 2, at = seq(0, 0.5, by = 0.1))
+
 # Add line for weal identifiers
 lines(figure1_data$year, figure1_data$strong,
       type = "o", col = "black", lty = 1, pch=16)
+
 # Add line for strong identifiers
 lines(figure1_data$year, figure1_data$weak,
       type = "o", col = "black", lty = 2)
@@ -94,18 +91,18 @@ legend("bottom",
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
 
-
 # Figure 1B: Independents and leaners
-# Plot
 plot(x = 0, type = "n",
      xlim = range(figure1_data$year), xaxt = "n",
      ylim = c(0, 0.5), yaxt = "n",
      xlab = " ",
      ylab = " ",
      main=" ")
+
 # Add line for independent leaners
 lines(figure1_data$year, figure1_data$indeps,
       type = "o", col = "black", lty = 1, pch=16)
+
 # Add line for pure independents
 lines(figure1_data$year, figure1_data$leaners,
       type = "o", col = "black", lty = 2)
@@ -119,8 +116,6 @@ legend("topleft",
        legend = c("Pure Independents", "Independent Leaners"),
        lty = c(2, 1), pch = c(1, 16),
        bty = "n")
-
-# Figure 2: Recoding
 
 # Figure 2: Recoding
 ces_1 <- ces_1 |>
