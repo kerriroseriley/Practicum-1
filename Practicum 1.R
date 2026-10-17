@@ -150,9 +150,6 @@ ces_1 <- ces_1 |>
     )
   )
 
-# Check turnout labels
-table(ces_1$turnout_label, useNA = "ifany")
-
 # Calculate yearly means for Figure 2
 figure2_data <- ces_1 |>
   group_by(year) |>
@@ -164,28 +161,27 @@ figure2_data <- ces_1 |>
     .groups = "drop"
   )
 
-# View yearly means
-print(figure2_data)
-
 # Figure 2: Party Identification by Voting Status
-plot(NA,
-     xlim = c(2006, 2024),
-     ylim = c(0, 1),
-     xaxt = "n",
-     yaxt = "n",
+plot(x = 0, type = "n",
+     xlim = range(figure2_data$year), xaxt = "n",
+     ylim = c(0, 1), yaxt = "n",
      xlab = "Year",
      ylab = "Proportion of Party Identifiers",
      main = "Party Identification by Voting Status")
 
-axis(1, at = seq(2006, 2024, by = 2))
-axis(2, at = seq(0, 1, by = 0.1), las = 1)
+# Add axis labels
+axis(side = 1, at = seq(2006, 2024, by = 2))
+axis(side = 2, at = seq(0, 1, by = 0.1), las = 1)
 
+# Add line for voters
 lines(figure2_data$year, figure2_data$voters,
       type = "o", col = "black", lty = 1, pch = 16)
 
+# Add line for nonvoters
 lines(figure2_data$year, figure2_data$nonvoters,
       type = "o", col = "black", lty = 2, pch = 1)
 
+# Add legend
 legend("bottomleft",
        legend = c("Voters", "Nonvoters"),
        lty = c(1, 2),
